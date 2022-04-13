@@ -16,5 +16,9 @@ module "master" {
   username = var.username
   password = random_password.postgres.result
 
+  db_subnet_group_name   = module.vpc.database_subnet_group
+  vpc_security_group_ids = [module.security_group.security_group_id]
+  subnet_ids = module.vpc.private_subnets
+
   tags = local.tags
 }
